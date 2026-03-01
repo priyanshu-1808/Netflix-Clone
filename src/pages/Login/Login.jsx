@@ -6,18 +6,17 @@ const Login = () => {
 
 const [signState,setSignState] = useState("Sign In")
 
-
-
   return (
     <div className='login'>
       <img src={logo} className='login-logo' alt="" />
       <div className="login-form">
         <h1>{signState}</h1>
         <form >
-          <input type="text" placeholder='Your Name' />
+          {signState==="Sign Up"?<input type="text" placeholder='Your Name' />:<></>}
+          
           <input type="email" placeholder='Email' />
           <input type="password" placeholder='Password' />
-          <button>Sign In</button>
+          <button>{signState}</button>
           <div className="form-help">
 
             <div className="remember">
@@ -28,9 +27,12 @@ const [signState,setSignState] = useState("Sign In")
           </div>
         </form>
         <div className="form-switch">
-          <p>New To Netflix? <span>Sign Up Now</span></p>
-          <p>Already have account? <span>Sign In Now</span></p>
-        </div>
+          {signState==="Sign In"?
+          <p>New To Netflix? <span onClick={()=>{setSignState("Sign Up")}}>Sign Up Now</span></p>
+          : <p>Already have account? <span onClick={()=>{setSignState("Sign In")}}>Sign In Now</span></p>
+          }
+          
+         </div>
       </div>
     </div>
   )
