@@ -8,15 +8,16 @@ import { createUserWithEmailAndPassword,
 import { addDoc, 
   collection, 
   getFirestore } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDVnHraJXdmiuSzmDznSpxOf6YrhYMFN1U",
-  authDomain: "netflix-clone-af3ca.firebaseapp.com",
-  projectId: "netflix-clone-af3ca",
-  storageBucket: "netflix-clone-af3ca.firebasestorage.app",
-  messagingSenderId: "665092383615",
-  appId: "1:665092383615:web:c879d938228b293fc1b04a",
-  measurementId: "G-9F0YBKCTBF"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 
@@ -37,7 +38,7 @@ const signup = async (name, email, password)=>{
  });
  } catch (error) {
     console.log(error);
-    alert(error);
+    toast.error(error.code);
  }
 }
 
@@ -46,7 +47,7 @@ const login = async(email,password)=> {
     await signInWithEmailAndPassword(auth, email, password)
    } catch (error) {
      console.log(error);
-     alert(error);
+     toast.error(error.code);
    }
 }
 
